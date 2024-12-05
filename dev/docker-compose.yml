@@ -1,0 +1,32 @@
+version: "3.8"
+services:
+  contents-api:
+    image: mcr.microsoft.com/dotnet/sdk:6.0-bookworm-slim
+    volumes:
+      - "..:/app"
+    restart: "unless-stopped"
+    working_dir: "/app"
+    entrypoint: /app/dev/entrypoint.sh
+    ports:
+      - 50113:80
+    environment: 
+      ASPNETCORE_ENVIRONMENT: Development
+      MONGO_DB_NAME: contents-api
+      MONGO_CONNECTION_STRING: mongodb://root:root@mongodb:27017/
+      API_KEY: secret
+      KEYCLOAK_BASE_URL: "http://keycloak:8080"
+      KEYCLOAK_REALM: "darwin"
+      KEYCLOAK_AUDIENCE: "account"
+    dns:
+      - 9.9.9.9
+      - 8.8.8.8
+      - 10.200.0.53
+      - 10.201.0.53
+    networks:
+      - PL_AUTOMATION-network
+    
+networks:
+  PL_AUTOMATION-network:
+    name: PL_AUTOMATION-network
+    external: true
+ 

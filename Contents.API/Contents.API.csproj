@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <UserSecretsId>67ce3d09-62f2-49d8-89a9-2ec83777144d</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.18.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+
+		<PackageReference Include="AutoMapper" Version="12.0.1" />
+		<PackageReference Include="DarwinAuthorization" Version="1.0.10" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.15" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.0.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+		<PackageReference Include="Serilog" Version="2.12.0" />
+		<PackageReference Include="Serilog.AspNetCore" Version="6.1.0" />
+		<PackageReference Include="Serilog.Extensions.Logging" Version="3.1.0" />
+		<PackageReference Include="Serilog.Settings.Configuration" Version="3.4.0" />
+		<PackageReference Include="Serilog.Sinks.Console" Version="4.1.0" />
+		<PackageReference Include="Serilog.Sinks.Elasticsearch" Version="9.0.0" />
+		<PackageReference Include="System.IO.Compression.ZipFile" Version="4.3.0" />
+		<PackageReference Include="WLS.Log.LoggerTransactionPattern" Version="5.0.0" />
+		<PackageReference Include="WLS.KafkaMessenger" Version="5.4.0" />
+		<PackageReference Include="WLS.Monitoring.HealthCheck" Version="5.0.0" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Contents.Domain\Contents.Domain.csproj" />
+    <ProjectReference Include="..\Contents.Infrastructure.Interface\Contents.Infrastructure.Interface.csproj" />
+    <ProjectReference Include="..\Contents.Infrastructure\Contents.Infrastructure.csproj" />
+    <ProjectReference Include="..\Contents.Services\Contents.Services.csproj" />
+  </ItemGroup>
+
+</Project>

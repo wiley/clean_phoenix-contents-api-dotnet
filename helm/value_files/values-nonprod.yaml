@@ -1,0 +1,68 @@
+# This file is in YAML format
+# Declared variables to be passed into $/templates files
+
+appName: contents-api
+namespace: phoenix-qa
+
+image:
+  repository: 889859566884.dkr.ecr.us-east-1.amazonaws.com/phoenix-contents-api
+  tag: qa
+  pullPolicy: Always
+
+imagePullSecrets: []
+
+service:
+  type: NodePort
+  port: 80
+
+ingress:
+  external:
+    sslRedirect: "false"
+    forceSslRedirect: "true"
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 100m
+    memory: 256Mi
+
+autoscaling:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 70
+  targetMemoryUtilizationPercentage: 85
+
+dns:
+  internal: dev.sgp.private.wiley.host
+  external: dev.sgp.wiley.host
+
+env_vars:
+  data:
+    KAFKA_HOST: b-1.eksnonprodus.rsck18.c20.kafka.us-east-1.amazonaws.com:9092,b-2.eksnonprodus.rsck18.c20.kafka.us-east-1.amazonaws.com:9092
+    KAFKA_TOPIC: ck-phoenix-trainingProgram
+    LOG_JSON: "true"
+    LOG_MINIMUMLEVEL: Information
+    MONGO_DB_NAME: contents-api
+    MONGO_TLS_CA_FILE_PATH: "/cert/global-bundle.pem"
+    KEYCLOAK_BASE_URL: "https://keycloak.dev.sgp.wiley.host"
+    KEYCLOAK_REALM: "phoenix"
+    KEYCLOAK_AUDIENCE: "account"
+    OPA_BASE_URL: "http://opa"
+    GATEWAY_HOST: "phoenix.dev.sgp.wiley.host"
+
+externalsecrets:
+  refreshInterval: 1m
+  secretCreationPolicy: Owner
+  secretStoreName: eks-nonprod-us-secret-manager
+  secretStoreType: ClusterSecretStore
+  data:
+  - keyValue: dev/eks/phoenix
+    nameValue: API_KEY
+    propertyValue: CONTENTS_API_KEY
+  - keyValue: dev/eks/phoenix
+    nameValue: MONGO_CONNECTION_STRING
+    propertyValue: CONTENTS_API_NONPROD_MONGO_CONNECTION_STRING
+
